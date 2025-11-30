@@ -4,8 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Abdelrhman Hassan - Node.js Backend Developer & Linux System User. Specializing in scalable server-side applications and REST APIs.">
+    <meta name="theme-color" content="#217756">
     <title>Abdelrhman Hassan - Frontend Developer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </noscript>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
@@ -17,15 +27,15 @@
         }
 
         :root {
-            --primary-color: #0A6847;
-            --secondary-color: #7ABA78;
-            --accent-color: #F3CA52;
-            --dark-color: #0A6847;
-            --light-color: #7ABA78;
+            --primary-color: #217756;
+            --secondary-color: #62B593;
+            --accent-color: #FCED25;
+            --dark-color: #217756;
+            --light-color: #62B593;
             --text-color: #e5e7eb;
-            --card-bg: #7ABA78;
-            --nav-bg: #0A6847;
-            --border-color: #F3CA52;
+            --card-bg: #62B593;
+            --nav-bg: #217756;
+            --border-color: #FCED25;
         }
 
         html {
@@ -151,7 +161,7 @@
         .parallax-circle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(243, 202, 82, 0.15);
+            background: rgba(252, 237, 37, 0.15);
             backdrop-filter: blur(10px);
         }
 
@@ -404,7 +414,7 @@
 
         /* Projects Section */
         #projects {
-            background: linear-gradient(180deg, var(--dark-color) 0%, rgba(10, 104, 71, 0.95) 100%);
+            background: linear-gradient(180deg, var(--dark-color) 0%, rgba(33, 119, 86, 0.95) 100%);
             position: relative;
         }
 
@@ -415,9 +425,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(122, 186, 120, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(243, 202, 82, 0.1) 0%, transparent 50%);
+            background:
+                radial-gradient(circle at 20% 50%, rgba(98, 181, 147, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(252, 237, 37, 0.1) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -431,17 +441,18 @@
         }
 
         .project-card {
-            background: linear-gradient(145deg, rgba(122, 186, 120, 0.95) 0%, rgba(10, 104, 71, 0.95) 100%);
+            background: linear-gradient(145deg, rgba(98, 181, 147, 0.95) 0%, rgba(33, 119, 86, 0.95) 100%);
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 
+            box-shadow:
                 0 10px 40px rgba(0, 0, 0, 0.2),
-                0 0 0 1px rgba(243, 202, 82, 0.2),
+                0 0 0 1px rgba(252, 237, 37, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(243, 202, 82, 0.3);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            border: 1px solid rgba(252, 237, 37, 0.3);
             position: relative;
-            backdrop-filter: blur(10px);
+            /* backdrop-filter: blur(10px); Removed for performance */
+            will-change: transform;
         }
 
         .project-card::before {
@@ -459,10 +470,10 @@
 
         .project-card:hover {
             transform: translateY(-15px) scale(1.02);
-            box-shadow: 
+            box-shadow:
                 0 20px 60px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(243, 202, 82, 0.4),
-                0 0 30px rgba(243, 202, 82, 0.2);
+                0 0 0 1px rgba(252, 237, 37, 0.4),
+                0 0 30px rgba(252, 237, 37, 0.2);
         }
 
         .project-card:hover::before {
@@ -485,7 +496,7 @@
         .project-icon {
             width: 56px;
             height: 56px;
-            background: linear-gradient(135deg, var(--accent-color), rgba(243, 202, 82, 0.7));
+            background: linear-gradient(135deg, var(--accent-color), rgba(252, 237, 37, 0.7));
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -493,13 +504,13 @@
             font-size: 1.5rem;
             color: var(--primary-color);
             flex-shrink: 0;
-            box-shadow: 0 4px 15px rgba(243, 202, 82, 0.3);
+            box-shadow: 0 4px 15px rgba(252, 237, 37, 0.3);
             transition: all 0.3s ease;
         }
 
         .project-card:hover .project-icon {
             transform: rotate(5deg) scale(1.1);
-            box-shadow: 0 6px 20px rgba(243, 202, 82, 0.4);
+            box-shadow: 0 6px 20px rgba(252, 237, 37, 0.4);
         }
 
         .project-title-wrapper {
@@ -530,29 +541,29 @@
         }
 
         .project-tag {
-            background: rgba(10, 104, 71, 0.4);
+            background: rgba(33, 119, 86, 0.4);
             color: var(--text-color);
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 500;
             transition: all 0.3s ease;
-            border: 1px solid rgba(243, 202, 82, 0.2);
-            backdrop-filter: blur(5px);
+            border: 1px solid rgba(252, 237, 37, 0.2);
+            /* backdrop-filter: blur(5px); Removed for performance */
         }
 
         .project-tag:hover {
-            background: rgba(243, 202, 82, 0.2);
+            background: rgba(252, 237, 37, 0.2);
             border-color: var(--accent-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(243, 202, 82, 0.2);
+            box-shadow: 0 4px 12px rgba(252, 237, 37, 0.2);
         }
 
         .project-links {
             display: flex;
             gap: 12px;
             padding-top: 20px;
-            border-top: 1px solid rgba(243, 202, 82, 0.2);
+            border-top: 1px solid rgba(252, 237, 37, 0.2);
         }
 
         .project-link {
@@ -565,9 +576,9 @@
             font-size: 0.9rem;
             transition: all 0.3s ease;
             padding: 10px 20px;
-            background: rgba(243, 202, 82, 0.1);
+            background: rgba(252, 237, 37, 0.1);
             border-radius: 12px;
-            border: 1px solid rgba(243, 202, 82, 0.3);
+            border: 1px solid rgba(252, 237, 37, 0.3);
             flex: 1;
             justify-content: center;
         }
@@ -576,7 +587,7 @@
             background: var(--accent-color);
             color: var(--primary-color);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(243, 202, 82, 0.3);
+            box-shadow: 0 6px 20px rgba(252, 237, 37, 0.3);
             border-color: var(--accent-color);
         }
 
@@ -586,7 +597,7 @@
 
         /* Reviews Section */
         #reviews {
-            background: linear-gradient(180deg, rgba(10, 104, 71, 0.95) 0%, var(--dark-color) 100%);
+            background: linear-gradient(180deg, rgba(33, 119, 86, 0.95) 0%, var(--dark-color) 100%);
             position: relative;
         }
 
@@ -597,9 +608,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 30% 40%, rgba(122, 186, 120, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 70% 60%, rgba(243, 202, 82, 0.1) 0%, transparent 50%);
+            background:
+                radial-gradient(circle at 30% 40%, rgba(98, 181, 147, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(252, 237, 37, 0.1) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -619,20 +630,20 @@
             position: relative;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 
+            box-shadow:
                 0 10px 30px rgba(0, 0, 0, 0.2),
-                0 0 0 1px rgba(243, 202, 82, 0.2);
+                0 0 0 1px rgba(252, 237, 37, 0.2);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: linear-gradient(145deg, rgba(122, 186, 120, 0.1) 0%, rgba(10, 104, 71, 0.1) 100%);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(145deg, rgba(98, 181, 147, 0.1) 0%, rgba(33, 119, 86, 0.1) 100%);
+            /* backdrop-filter: blur(10px); Removed for performance */
         }
 
         .review-item:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 
+            box-shadow:
                 0 20px 50px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(243, 202, 82, 0.4),
-                0 0 30px rgba(243, 202, 82, 0.2);
+                0 0 0 1px rgba(252, 237, 37, 0.4),
+                0 0 30px rgba(252, 237, 37, 0.2);
         }
 
         .review-image-wrapper {
@@ -640,7 +651,7 @@
             width: 100%;
             padding-top: 80%;
             overflow: hidden;
-            background: rgba(10, 104, 71, 0.15);
+            background: rgba(33, 119, 86, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -669,7 +680,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(to bottom, transparent 0%, rgba(10, 104, 71, 0.7) 100%);
+            background: linear-gradient(to bottom, transparent 0%, rgba(33, 119, 86, 0.7) 100%);
             opacity: 0;
             transition: opacity 0.3s ease;
             display: flex;
@@ -717,7 +728,7 @@
             max-height: 90%;
             object-fit: contain;
             border-radius: 10px;
-            box-shadow: 0 10px 50px rgba(243, 202, 82, 0.3);
+            box-shadow: 0 10px 50px rgba(252, 237, 37, 0.3);
             animation: zoomIn 0.3s ease;
         }
 
@@ -742,6 +753,7 @@
                 transform: scale(0.8);
                 opacity: 0;
             }
+
             to {
                 transform: scale(1);
                 opacity: 1;
@@ -1034,7 +1046,7 @@
             </div>
         </div>
         <div class="container">
-            <img src="avater.png" alt="Abdelrhman Hassan" class="profile-img">
+            <img src="avater.png" alt="Abdelrhman Hassan" class="profile-img" width="200" height="200">
             <h1>Abdelrhman Hassan</h1>
             <p>Node.js Backend Developer | Linux System User</p>
             <div class="cta-buttons">
@@ -1052,8 +1064,11 @@
             <div class="about-content">
                 <div class="about-text">
                     <p>
-                 About
-Backend Developer specializing in building scalable server-side applications and REST APIs using Node.js and Express.js. Experienced with databases, authentication, API architecture, and working in Linux server environments. Focused on writing clean, efficient code and delivering secure, high-performance backend solutions
+                        About
+                        Backend Developer specializing in building scalable server-side applications and REST APIs using
+                        Node.js and Express.js. Experienced with databases, authentication, API architecture, and
+                        working in Linux server environments. Focused on writing clean, efficient code and delivering
+                        secure, high-performance backend solutions
                     </p>
                 </div>
                 <div class="about-stats">
@@ -1176,7 +1191,7 @@ Backend Developer specializing in building scalable server-side applications and
                             <div class="skill-progress" style="width: 95%"></div>
                         </div>
                     </div>
-                      <div class="skill-item">
+                    <div class="skill-item">
                         <div class="skill-info">
                             <span>Postman</span>
                             <span>80%</span>
@@ -1185,7 +1200,7 @@ Backend Developer specializing in building scalable server-side applications and
                             <div class="skill-progress" style="width: 80%"></div>
                         </div>
                     </div>
-                         <div class="skill-item">
+                    <div class="skill-item">
                         <div class="skill-info">
                             <span>Linux System</span>
                             <span>85%</span>
@@ -1199,450 +1214,459 @@ Backend Developer specializing in building scalable server-side applications and
         </div>
     </section>
 
-   <section id="projects" class="section">
-  <div class="container">
-    <div class="section-header">
-      <h2>My Projects</h2>
-    </div>
-    <div class="projects-grid">
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>My Projects</h2>
+            </div>
+            <div class="projects-grid">
 
-      <!-- Omnia Abess -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-            <i class="fas fa-user-circle"></i>
+                <!-- Omnia Abess -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Omnia Abess - موقع شخصي</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع شخصي يعرض المهارات والخبرات بطريقة احترافية مع واجهة مستخدم جذابة وتجربة تصفح سلسة.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تصميم متجاوب</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/omnia-Abess/" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Heba Taha -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Heba Taha - بورتفوليو</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع بورتفوليو احترافي مع تصميم عصري وتجربة مستخدم سلسة، يعرض المهارات والمشاريع بشكل جذاب.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تصميم مواقع</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/Heba-Taha/" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Basel Sharaf -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Basel Sharaf - موقع شخصي</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع شخصي متكامل مع واجهة مستخدم حديثة وتجربة تصفح مميزة، يعرض المهارات والمشاريع بفعالية.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تجربة المستخدم</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/Basel-Sharaf/" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ebtehal Mohamed -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Ebtehal Mohamed - موقع شخصي</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع شخصي بتصميم عصري وتجربة مستخدم سلسة مع إمكانية عرض الأقسام والمشاريع بطريقة منظمة.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تصميم متجاوب</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/Ebtehal-mohamed/" class="project-link"
+                                target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mawada Ahmed Adam -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Mawada Ahmed Adam - موقع شخصي</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع شخصي يعرض المشاريع والمهارات بطريقة احترافية مع واجهة مستخدم جذابة.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تجربة المستخدم</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/Mawada-Ahmed-Adam/" class="project-link"
+                                target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Youmna Elsaeed -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Youmna Elsaeed - بورتفوليو</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع بورتفوليو احترافي يعرض الأعمال والخبرات مع تأثيرات حركية وتجربة مستخدم سلسة.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تأثيرات حركية</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/Youmna-Elsaeed/" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Norhan Mohamed -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Norhan Mohamed - موقع شخصي</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع شخصي متكامل مع واجهة مستخدم حديثة وتجربة تصفح ممتازة لعرض المهارات والمشاريع.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تصميم متجاوب</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/Norhan-Mohamed-/" class="project-link"
+                                target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lubna Rashid -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Lubna Rashid - موقع شخصي</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع شخصي مع تصميم عصري وتجربة مستخدم سلسة، يركز على عرض المشاريع والمهارات بشكل جذاب.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تصميم مواقع</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/Lubna_Rashid/" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salma Alaa Eldeen -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Salma Alaa Eldeen - موقع شخصي</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع شخصي عصري يعرض الخبرات والمهارات بطريقة سلسة وجذابة للمستخدم.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تجربة المستخدم</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/Salma-Alaa-Eldeen/" class="project-link"
+                                target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Osama Shehab -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-pen-nib"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Osama Shehab - Content Writer</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع شخصي لكاتب محتوى متخصص في استراتيجية SEO والكتابة الإبداعية، يعرض الخدمات والمشاريع
+                            بطريقة احترافية.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تصميم متجاوب</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/Osama-Shehab/" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Abdeen Mohamed -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Abdeen Mohamed - Content Writer & Social Media</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع شخصي لكاتب محتوى ومتخصص في وسائل التواصل الاجتماعي وكاتب سيناريو، يعرض الخبرات
+                            والمشاريع بشكل احترافي.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تصميم متجاوب</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/Abdeen-Mohamed/" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Duha Abubaker -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Duha Abubaker - Social Media Marketing Specialist</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع شخصي لمتخصصة في تسويق وسائل التواصل الاجتماعي وكتابة المحتوى، يعرض المهارات والخبرات
+                            والمشاريع بطريقة احترافية.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تصميم متجاوب</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/Duha-Abubaker/" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ahmed Hussein -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Ahmed Hussein - Content Writing & Copywriting</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع شخصي لكاتب محتوى متخصص في كتابة النصوص الإعلانية وكتابة صفحات الهبوط، يعرض نماذج
+                            الأعمال والخبرات بشكل احترافي.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تصميم متجاوب</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/AHMED-HUSSEIN/" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menna Mahmoud -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="project-title-wrapper">
+                                <h3 class="project-title">Menna Mahmoud - موقع شخصي</h3>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            موقع شخصي احترافي يعرض المهارات والخبرات والمشاريع بطريقة عصرية مع واجهة مستخدم جذابة وتجربة
+                            تصفح سلسة.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">تصميم متجاوب</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://puplichost.github.io/MennaMahmoud/" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> معاينة مباشرة
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> كود المصدر
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Omnia Abess - موقع شخصي</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع شخصي يعرض المهارات والخبرات بطريقة احترافية مع واجهة مستخدم جذابة وتجربة تصفح سلسة.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تصميم متجاوب</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/omnia-Abess/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
         </div>
-      </div>
-
-      <!-- Heba Taha -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-            <i class="fas fa-briefcase"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Heba Taha - بورتفوليو</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع بورتفوليو احترافي مع تصميم عصري وتجربة مستخدم سلسة، يعرض المهارات والمشاريع بشكل جذاب.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تصميم مواقع</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/Heba-Taha/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Basel Sharaf -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-            <i class="fas fa-laptop"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Basel Sharaf - موقع شخصي</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع شخصي متكامل مع واجهة مستخدم حديثة وتجربة تصفح مميزة، يعرض المهارات والمشاريع بفعالية.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تجربة المستخدم</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/Basel-Sharaf/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Ebtehal Mohamed -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-            <i class="fas fa-palette"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Ebtehal Mohamed - موقع شخصي</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع شخصي بتصميم عصري وتجربة مستخدم سلسة مع إمكانية عرض الأقسام والمشاريع بطريقة منظمة.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تصميم متجاوب</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/Ebtehal-mohamed/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mawada Ahmed Adam -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-            <i class="fas fa-user-circle"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Mawada Ahmed Adam - موقع شخصي</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع شخصي يعرض المشاريع والمهارات بطريقة احترافية مع واجهة مستخدم جذابة.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تجربة المستخدم</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/Mawada-Ahmed-Adam/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Youmna Elsaeed -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-            <i class="fas fa-briefcase"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Youmna Elsaeed - بورتفوليو</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع بورتفوليو احترافي يعرض الأعمال والخبرات مع تأثيرات حركية وتجربة مستخدم سلسة.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تأثيرات حركية</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/Youmna-Elsaeed/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Norhan Mohamed -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-            <i class="fas fa-laptop"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Norhan Mohamed - موقع شخصي</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع شخصي متكامل مع واجهة مستخدم حديثة وتجربة تصفح ممتازة لعرض المهارات والمشاريع.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تصميم متجاوب</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/Norhan-Mohamed-/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Lubna Rashid -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-            <i class="fas fa-palette"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Lubna Rashid - موقع شخصي</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع شخصي مع تصميم عصري وتجربة مستخدم سلسة، يركز على عرض المشاريع والمهارات بشكل جذاب.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تصميم مواقع</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/Lubna_Rashid/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Salma Alaa Eldeen -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-            <i class="fas fa-user-circle"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Salma Alaa Eldeen - موقع شخصي</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع شخصي عصري يعرض الخبرات والمهارات بطريقة سلسة وجذابة للمستخدم.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تجربة المستخدم</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/Salma-Alaa-Eldeen/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Osama Shehab -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-              <i class="fas fa-pen-nib"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Osama Shehab - Content Writer</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع شخصي لكاتب محتوى متخصص في استراتيجية SEO والكتابة الإبداعية، يعرض الخدمات والمشاريع بطريقة احترافية.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تصميم متجاوب</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/Osama-Shehab/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Abdeen Mohamed -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-              <i class="fas fa-file-alt"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Abdeen Mohamed - Content Writer & Social Media</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع شخصي لكاتب محتوى ومتخصص في وسائل التواصل الاجتماعي وكاتب سيناريو، يعرض الخبرات والمشاريع بشكل احترافي.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تصميم متجاوب</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/Abdeen-Mohamed/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Duha Abubaker -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-              <i class="fas fa-share-alt"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Duha Abubaker - Social Media Marketing Specialist</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع شخصي لمتخصصة في تسويق وسائل التواصل الاجتماعي وكتابة المحتوى، يعرض المهارات والخبرات والمشاريع بطريقة احترافية.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تصميم متجاوب</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/Duha-Abubaker/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Ahmed Hussein -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-              <i class="fas fa-edit"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Ahmed Hussein - Content Writing & Copywriting</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع شخصي لكاتب محتوى متخصص في كتابة النصوص الإعلانية وكتابة صفحات الهبوط، يعرض نماذج الأعمال والخبرات بشكل احترافي.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تصميم متجاوب</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/AHMED-HUSSEIN/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Menna Mahmoud -->
-      <div class="project-card">
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-icon">
-              <i class="fas fa-user-circle"></i>
-            </div>
-            <div class="project-title-wrapper">
-              <h3 class="project-title">Menna Mahmoud - موقع شخصي</h3>
-            </div>
-          </div>
-          <p class="project-description">
-            موقع شخصي احترافي يعرض المهارات والخبرات والمشاريع بطريقة عصرية مع واجهة مستخدم جذابة وتجربة تصفح سلسة.
-          </p>
-          <div class="project-tags">
-            <span class="project-tag">HTML5</span>
-            <span class="project-tag">CSS3</span>
-            <span class="project-tag">JavaScript</span>
-            <span class="project-tag">تصميم متجاوب</span>
-          </div>
-          <div class="project-links">
-            <a href="https://puplichost.github.io/MennaMahmoud/" class="project-link" target="_blank">
-              <i class="fas fa-external-link-alt"></i> معاينة مباشرة
-            </a>
-            <a href="#" class="project-link">
-              <i class="fab fa-github"></i> كود المصدر
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
+    </section>
 
     <section id="reviews" class="section">
         <div class="container">
@@ -1653,7 +1677,8 @@ Backend Developer specializing in building scalable server-side applications and
                 <div class="reviews-grid">
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.00 AM.jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.00 AM.jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1661,7 +1686,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.01 AM.jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.01 AM.jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1669,7 +1695,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.01 AM(1).jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.01 AM(1).jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1677,7 +1704,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.01 AM(2).jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.01 AM(2).jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1685,7 +1713,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.02 AM.jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.02 AM.jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1693,7 +1722,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.02 AM(1).jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.02 AM(1).jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1701,7 +1731,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.57 AM.jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.57 AM.jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1709,7 +1740,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.57 AM(1).jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.57 AM(1).jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1717,7 +1749,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.57 AM(2).jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.57 AM(2).jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1725,7 +1758,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.58 AM.jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.58 AM.jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1733,7 +1767,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.58 AM(1).jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.58 AM(1).jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1741,7 +1776,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.58 AM(2).jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.58 AM(2).jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1749,7 +1785,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.58 AM(3).jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.58 AM(3).jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1757,7 +1794,8 @@ Backend Developer specializing in building scalable server-side applications and
                     </div>
                     <div class="review-item">
                         <div class="review-image-wrapper">
-                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.59 AM.jpeg" alt="Client Review" class="review-image">
+                            <img src="Reviews/WhatsApp Image 2025-11-30 at 3.32.59 AM.jpeg" alt="Client Review"
+                                class="review-image" loading="lazy" width="280" height="224">
                             <div class="review-overlay">
                                 <i class="fas fa-search-plus review-icon"></i>
                             </div>
@@ -1797,17 +1835,18 @@ Backend Developer specializing in building scalable server-side applications and
                         <a href="https://github.com/puplicHost" class="social-link"><i class="fab fa-github"></i></a>
                         <a href="https://www.linkedin.com/in/abdelrahman-hasan-67187a38b/" class="social-link"><i
                                 class="fab fa-linkedin"></i></a>
-                      <a href="https://wa.me/201223789179" class="social-link" target="_blank">
-  <i class="fab fa-whatsapp"></i>
-</a>
+                        <a href="https://wa.me/201223789179" class="social-link" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
 
-                   <a href="mailto:dodahassan0045@gmail.com" class="social-link">
-  <i class="fas fa-envelope"></i> 
-</a>
+                        <a href="mailto:dodahassan0045@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
 
-<a href="https://www.youtube.com/@LinuxUserrr-v1j" class="social-link" target="_blank" title="اشترك في قناتي على يوتيوب">
-  <i class="fab fa-youtube"></i> 
-</a>
+                        <a href="https://www.youtube.com/@LinuxUserrr-v1j" class="social-link" target="_blank"
+                            title="اشترك في قناتي على يوتيوب">
+                            <i class="fab fa-youtube"></i>
+                        </a>
 
 
                     </div>
@@ -1866,10 +1905,10 @@ Backend Developer specializing in building scalable server-side applications and
                 const rect = header.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
+
                 const moveX = (x - centerX) / centerX;
                 const moveY = (y - centerY) / centerY;
 
@@ -1877,7 +1916,7 @@ Backend Developer specializing in building scalable server-side applications and
                     const speed = parseFloat(layer.getAttribute('data-speed')) || 0.5;
                     const offsetX = moveX * 50 * speed;
                     const offsetY = moveY * 50 * speed;
-                    
+
                     layer.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
                 });
             });
@@ -1897,7 +1936,7 @@ Backend Developer specializing in building scalable server-side applications and
         const reviewItems = document.querySelectorAll('.review-item');
 
         reviewItems.forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 const img = this.querySelector('.review-image');
                 if (img) {
                     lightboxImg.src = img.src;
@@ -1914,14 +1953,14 @@ Backend Developer specializing in building scalable server-side applications and
         }
 
         lightboxClose.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', function(e) {
+        lightbox.addEventListener('click', function (e) {
             if (e.target === lightbox) {
                 closeLightbox();
             }
         });
 
         // Close lightbox with Escape key
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                 closeLightbox();
             }
