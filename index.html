@@ -135,6 +135,92 @@
             transition: transform 0.3s ease;
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(180deg, var(--nav-bg) 0%, var(--primary-color) 100%);
+            z-index: 2000;
+            transition: left 0.3s ease;
+            padding: 80px 20px 30px;
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .sidebar-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sidebar-links a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 12px 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-links a:hover {
+            background: rgba(252, 237, 37, 0.2);
+            color: var(--accent-color);
+        }
+
+        .sidebar-links i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
         /* Favicon styles */
         .favicon {
             width: 32px;
@@ -935,6 +1021,10 @@
                 display: none;
             }
 
+            .menu-toggle {
+                display: block;
+            }
+
             header {
                 padding: 100px 0 60px;
             }
@@ -1082,8 +1172,50 @@
                     </a>
                 </li>
             </ul>
+            <button class="menu-toggle" aria-label="Open menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
+
+    <div class="sidebar-overlay"></div>
+    <div class="sidebar">
+        <button class="sidebar-close" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="sidebar-links">
+            <li>
+                <a href="#about">
+                    <i class="fas fa-user"></i>
+                    About
+                </a>
+            </li>
+            <li>
+                <a href="#skills">
+                    <i class="fas fa-code"></i>
+                    Skills
+                </a>
+            </li>
+            <li>
+                <a href="#projects">
+                    <i class="fas fa-project-diagram"></i>
+                    Projects
+                </a>
+            </li>
+            <li>
+                <a href="#reviews">
+                    <i class="fas fa-star"></i>
+                    Reviews
+                </a>
+            </li>
+            <li>
+                <a href="#footer">
+                    <i class="fas fa-envelope"></i>
+                    Contact
+                </a>
+            </li>
+        </ul>
+    </div>
 
     <header>
         <div class="parallax-bg">
@@ -2367,6 +2499,40 @@
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                 closeLightbox();
+            }
+        });
+
+        // Sidebar Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarOverlay = document.querySelector('.sidebar-overlay');
+        const sidebarClose = document.querySelector('.sidebar-close');
+
+        function openSidebar() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        menuToggle.addEventListener('click', openSidebar);
+        sidebarClose.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Close sidebar when clicking a link
+        document.querySelectorAll('.sidebar-links a').forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+
+        // Close sidebar with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                closeSidebar();
             }
         });
 
