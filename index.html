@@ -52,18 +52,44 @@
             --gradient: linear-gradient(135deg, #22c55e 0%, #0ea5e9 100%);
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+            --shadow-app: 0 8px 32px rgba(0, 0, 0, 0.35);
+            --shadow-app-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --radius-sm: 12px;
+            --radius-md: 18px;
+            --radius-lg: 24px;
+            --radius-xl: 28px;
+            --radius-pill: 999px;
+            --glass-bg: rgba(22, 22, 22, 0.72);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --nav-height: 64px;
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
 
         html {
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background-color: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + 16px);
+        }
+
+        @media (min-width: 769px) {
+            body {
+                padding-bottom: 0;
+            }
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
         }
 
         ::selection {
@@ -72,16 +98,17 @@
         }
 
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
+            height: 6px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
+            background: transparent;
         }
 
         ::-webkit-scrollbar-thumb {
             background: var(--border);
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
@@ -91,7 +118,13 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px;
+        }
+
+        @media (min-width: 769px) {
+            .container {
+                padding: 0 32px;
+            }
         }
 
         /* Scroll Progress */
@@ -107,7 +140,7 @@
         }
 
         /* Navigation */
-        nav {
+        nav:not(.bottom-nav) {
             position: fixed;
             top: 0;
             left: 0;
@@ -118,6 +151,12 @@
             border-bottom: 1px solid var(--border);
             z-index: 9999;
             padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            nav:not(.bottom-nav) {
+                display: none;
+            }
         }
 
         .nav-inner {
@@ -313,6 +352,14 @@
             inset: 0;
             pointer-events: none;
             overflow: hidden;
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            inset: 0;
+            background: url('background.png') center/cover no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
         }
 
         /* Animated Mesh Gradient Background */
@@ -606,6 +653,9 @@
             position: relative;
             z-index: 2;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .profile-img.avatar-float {
             animation: profileFloat 6s ease-in-out infinite;
         }
 
@@ -718,11 +768,13 @@
             align-items: center;
             gap: 10px;
             padding: 16px 32px;
-            border-radius: 14px;
+            border-radius: var(--radius-md);
             font-weight: 600;
             font-size: 0.9375rem;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: transform var(--t-base) var(--ease-out),
+                        box-shadow var(--t-base) var(--ease-out),
+                        background var(--t-base) var(--ease-out);
             cursor: pointer;
             border: none;
             position: relative;
@@ -735,7 +787,7 @@
             inset: 0;
             background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity var(--t-base) var(--ease-out);
         }
 
         .cta-btn:hover::before {
@@ -763,6 +815,10 @@
             box-shadow: 0 8px 30px rgba(34, 197, 94, 0.5);
         }
 
+        .cta-primary:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
         .cta-secondary {
             background: var(--bg-card);
             color: var(--text-primary);
@@ -775,6 +831,10 @@
             border-color: var(--border-light);
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-secondary:active {
+            transform: translateY(-1px) scale(0.98);
         }
 
         .header-social {
@@ -941,6 +1001,12 @@
             background: var(--bg-secondary);
         }
 
+        @media (max-width: 768px) {
+            .section:nth-child(even) {
+                background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+            }
+        }
+
         .section-header {
             text-align: center;
             margin-bottom: 64px;
@@ -965,6 +1031,20 @@
             height: 2px;
             background: var(--accent);
             opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .section-label {
+                font-size: 0.75rem;
+                padding: 6px 14px;
+                background: var(--accent-muted);
+                border-radius: var(--radius-pill);
+                margin-bottom: 20px;
+            }
+            .section-label::before,
+            .section-label::after {
+                display: none;
+            }
         }
 
         .section-title {
@@ -1008,10 +1088,12 @@
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: var(--radius-md);
             padding: 28px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: transform var(--t-base) var(--ease-out),
+                        border-color var(--t-base) var(--ease-out),
+                        box-shadow var(--t-base) var(--ease-out);
         }
 
         .stat-card:hover {
@@ -1055,9 +1137,11 @@
         .skill-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 20px;
+            border-radius: var(--radius-lg);
             padding: 32px;
-            transition: all 0.3s ease;
+            transition: transform var(--t-base) var(--ease-out),
+                        border-color var(--t-base) var(--ease-out),
+                        box-shadow var(--t-base) var(--ease-out);
         }
 
         .skill-card:hover {
@@ -1147,12 +1231,12 @@
             padding: 10px 20px;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 100px;
+            border-radius: var(--radius-pill);
             color: var(--text-secondary);
             font-size: 0.875rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: border-color var(--t-base) var(--ease-out), color var(--t-base) var(--ease-out), background-color var(--t-base) var(--ease-out);
         }
 
         .filter-btn:hover {
@@ -1166,49 +1250,362 @@
             border-color: var(--accent);
         }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: 24px;
-        }
+         .projects-grid {
+             display: grid;
+             grid-template-columns: repeat(4, 1fr);
+             gap: 24px;
+         }
 
         .project-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 20px;
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: transform var(--t-base) var(--ease-out),
+                        border-color var(--t-base) var(--ease-out),
+                        box-shadow var(--t-base) var(--ease-out),
+                        background-color var(--t-base) var(--ease-out);
             display: flex;
             flex-direction: column;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-muted) 0%, rgba(14, 165, 233, 0.05) 60%, transparent 100%);
+            opacity: 0.7;
+            pointer-events: none;
+            transition: opacity var(--t-base) var(--ease-out);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
         }
 
         .project-card:hover {
             border-color: var(--accent);
-            transform: translateY(-6px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            transform: translateY(-6px) scale(1.015);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--accent-muted);
+            background-color: var(--bg-card-hover, var(--bg-card));
+        }
+
+        .project-card:active {
+            transform: scale(0.99);
         }
 
         .project-card.hide {
             display: none;
         }
 
+        .project-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 11px 5px 9px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-pill);
+            color: var(--text-secondary);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            margin: 16px 0 0 20px;
+            align-self: flex-start;
+            text-transform: uppercase;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-category i {
+            font-size: 0.625rem;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .project-category {
+                margin: 10px 0 0 12px;
+                padding: 3px 7px 3px 5px;
+                font-size: 0.5625rem;
+                gap: 4px;
+            }
+
+            .project-category i {
+                font-size: 0.5rem;
+            }
+        }
+
         .project-body {
-            padding: 28px;
+            padding: 20px 24px 24px;
             flex: 1;
             display: flex;
             flex-direction: column;
-        }
-
-        .project-top {
-            display: flex;
-            align-items: flex-start;
+            justify-content: space-between;
             gap: 16px;
-            margin-bottom: 20px;
         }
 
-        .project-icon {
-            width: 48px;
-            height: 48px;
+        .project-title {
+            font-size: 1.0625rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .project-actions {
+            display: flex;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: var(--bg-primary);
+            border: 1px solid var(--accent);
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            transition: background-color var(--t-base) var(--ease-out), color var(--t-base) var(--ease-out), border-color var(--t-base) var(--ease-out), transform var(--t-base) var(--ease-out), box-shadow var(--t-base) var(--ease-out);
+            width: 100%;
+        }
+
+        .project-link:hover {
+            background: transparent;
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.2);
+        }
+
+        .project-link:active {
+            transform: scale(0.97);
+        }
+
+        .project-card:hover .project-actions {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-link i {
+            font-size: 0.75rem;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            transition: transform var(--t-base) var(--ease-out),
+                        border-color var(--t-base) var(--ease-out),
+                        box-shadow var(--t-base) var(--ease-out),
+                        background-color var(--t-base) var(--ease-out);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity var(--t-base) var(--ease-out);
+        }
+
+        .service-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-6px) scale(1.015);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--accent-muted);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-muted);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            transition: transform var(--t-base) var(--ease-out), background-color var(--t-base) var(--ease-out), color var(--t-base) var(--ease-out);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.08) rotate(-3deg);
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .service-title {
+            font-size: 1.375rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .service-desc {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .service-features-label {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .service-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .service-features li i {
+            color: var(--accent);
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        /* Why Work With Me */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .why-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            text-align: center;
+            transition: transform var(--t-base) var(--ease-out),
+                        border-color var(--t-base) var(--ease-out),
+                        box-shadow var(--t-base) var(--ease-out);
+        }
+
+        .why-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .why-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-primary);
+            font-size: 1.5rem;
+            margin: 0 auto 20px;
+            transition: transform var(--t-base) var(--ease-out);
+        }
+
+        .why-card:hover .why-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .why-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .why-desc {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform var(--t-base) var(--ease-out),
+                        border-color var(--t-base) var(--ease-out),
+                        background-color var(--t-base) var(--ease-out);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+            transform: translateX(6px);
+        }
+
+        .contact-card:active {
+            transform: scale(0.98);
+        }
+
+        .contact-card-icon {
+            width: 52px;
+            height: 52px;
             background: var(--accent-muted);
             border-radius: 12px;
             display: flex;
@@ -1219,80 +1616,87 @@
             flex-shrink: 0;
         }
 
-        .project-meta {
-            flex: 1;
+        .contact-card-label {
+            font-size: 0.8125rem;
+            color: var(--text-tertiary);
+            margin-bottom: 4px;
         }
 
-        .project-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-
-        .project-desc {
-            color: var(--text-secondary);
+        .contact-card-value {
             font-size: 0.9375rem;
-            line-height: 1.6;
-            flex: 1;
-            margin-bottom: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            word-break: break-word;
         }
 
-        .project-tags {
+        .contact-socials {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 24px;
-        }
-
-        .project-tag {
-            padding: 6px 12px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            transition: all 0.2s ease;
-        }
-
-        .project-tag:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .project-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
             gap: 12px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
         }
 
-        .project-link {
+        .contact-socials a {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 12px 16px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 10px;
             color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 600;
-            transition: all 0.2s ease;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
         }
 
-        .project-link:hover {
-            background: var(--accent);
-            color: var(--bg-primary);
+        .contact-socials a:hover {
             border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-4px);
         }
 
-        .project-link i {
-            font-size: 0.875rem;
+        .contact-cta {
+            background: var(--gradient);
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            color: var(--bg-primary);
+        }
+
+        .contact-cta-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .contact-cta-desc {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 28px;
+            opacity: 0.85;
+        }
+
+        .contact-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: var(--bg-primary);
+            color: var(--accent);
+            border-radius: 100px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform var(--t-base) var(--ease-out), box-shadow var(--t-base) var(--ease-out), background-color var(--t-base) var(--ease-out);
+            align-self: center;
+        }
+
+        .contact-cta-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
         }
 
         /* Reviews Section */
@@ -1473,11 +1877,99 @@
             transform: rotate(90deg);
         }
 
+        /* Bottom Navigation (Mobile App Bar) */
+        .bottom-nav {
+            position: fixed;
+            left: 12px;
+            right: 12px;
+            bottom: calc(12px + var(--safe-bottom));
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 4px;
+            padding: 8px;
+            background: var(--glass-bg);
+            backdrop-filter: saturate(180%) blur(24px);
+            -webkit-backdrop-filter: saturate(180%) blur(24px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-pill);
+            box-shadow: var(--shadow-app-lg);
+            transition: transform var(--t-base) var(--ease-out), opacity var(--t-base) var(--ease-out);
+        }
+
+        .bottom-nav.hidden {
+            transform: translateY(150%);
+            opacity: 0;
+        }
+
+        .bottom-nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            padding: 8px 4px;
+            min-height: 48px;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            border-radius: var(--radius-pill);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            transition: color var(--t-base) var(--ease-out), background-color var(--t-base) var(--ease-out), transform 0.2s var(--ease-out);
+            -webkit-user-select: none;
+            user-select: none;
+            position: relative;
+        }
+
+        .bottom-nav-item i {
+            font-size: 1.125rem;
+            transition: transform 0.4s var(--ease-out);
+        }
+
+        .bottom-nav-item:active {
+            transform: scale(0.92);
+        }
+
+        .bottom-nav-item.active {
+            color: var(--accent);
+        }
+
+        .bottom-nav-item.active i {
+            transform: translateY(-2px) scale(1.1);
+        }
+
+        .bottom-nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 0 0 3px 3px;
+        }
+
+        @media (min-width: 769px) {
+            .bottom-nav {
+                display: none;
+            }
+        }
+
         /* Footer */
         footer {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border);
-            padding: 80px 0 40px;
+            padding: 60px 0 calc(40px + var(--nav-height) + var(--safe-bottom));
+        }
+
+        @media (min-width: 769px) {
+            footer {
+                padding: 80px 0 40px;
+            }
         }
 
         .footer-grid {
@@ -1586,17 +2078,27 @@
             background: var(--accent);
             color: var(--bg-primary);
             border: none;
-            border-radius: 12px;
-            font-size: 1.25rem;
+            border-radius: 14px;
+            font-size: 1.125rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: transform var(--t-base) var(--ease-out), box-shadow var(--t-base) var(--ease-out), opacity var(--t-base) var(--ease-out);
             z-index: 999;
             box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .scroll-top {
+                bottom: calc(var(--nav-height) + var(--safe-bottom) + 24px);
+                right: 20px;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+            }
         }
 
         .scroll-top.visible {
@@ -1609,30 +2111,164 @@
             box-shadow: 0 12px 30px rgba(34, 197, 94, 0.4);
         }
 
+        .scroll-top:active {
+            transform: scale(0.94);
+        }
+
         /* Animations */
+        :root {
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+            --t-fast: 0.4s;
+            --t-base: 0.6s;
+            --t-slow: 0.8s;
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translate3d(0, 24px, 0);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translate3d(0, 0, 0);
             }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translate3d(-24px, 0, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translate3d(24px, 0, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes heroLoad {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 16px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate3d(0, 0, 0); }
+            50% { transform: translate3d(0, -6px, 0); }
+        }
+
+        @keyframes skillFill {
+            from { width: 0; }
         }
 
         .animate-in {
             opacity: 0;
+            will-change: opacity, transform;
         }
 
         .animate-in.visible {
-            animation: fadeInUp 0.6s ease forwards;
+            animation: fadeInUp var(--t-base) var(--ease-out) forwards;
+        }
+
+        /* Staggered cards using --i custom property */
+        .stagger > * {
+            opacity: 0;
+            will-change: opacity, transform;
+        }
+
+        .stagger.visible > * {
+            animation: fadeInUp var(--t-base) var(--ease-out) forwards;
+            animation-delay: calc(var(--i, 0) * 60ms);
+        }
+
+        @media (max-width: 768px) {
+            .stagger.visible > * {
+                animation: fadeInUp 0.4s var(--ease-out) forwards;
+                animation-delay: calc(var(--i, 0) * 40ms);
+            }
         }
 
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
         .delay-4 { animation-delay: 0.4s; }
+
+        /* Hero load animations (run on page load, not on scroll) */
+        .hero-animate {
+            opacity: 0;
+            animation: heroLoad 0.8s var(--ease-out) forwards;
+        }
+
+        .hero-animate.d1 { animation-delay: 0.1s; }
+        .hero-animate.d2 { animation-delay: 0.2s; }
+        .hero-animate.d3 { animation-delay: 0.35s; }
+        .hero-animate.d4 { animation-delay: 0.5s; }
+        .hero-animate.d5 { animation-delay: 0.65s; }
+
+        .avatar-float {
+            animation: float 6s var(--ease-in-out) infinite;
+        }
+
+        /* Timeline entry variants */
+        .timeline-item.animate-in {
+            transform: translate3d(0, 24px, 0);
+        }
+
+        .timeline-item.visible {
+            animation: fadeInUp var(--t-base) var(--ease-out) forwards;
+        }
+
+        .timeline-item:nth-child(odd).visible {
+            animation-name: fadeInLeft;
+        }
+
+        .timeline-item:nth-child(even).visible {
+            animation-name: fadeInRight;
+        }
+
+        /* Skill bar progressive fill */
+        .skill-fill {
+            width: 0;
+        }
+
+        .skill-card.visible .skill-fill {
+            animation: skillFill 1.2s var(--ease-out) forwards;
+            animation-delay: calc(var(--i, 0) * 100ms + 200ms);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .animate-in, .stagger > *, .hero-animate {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
 
         /* Experience Section */
         .experience-section {
@@ -1696,9 +2332,11 @@
         .timeline-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: var(--radius-md);
             padding: 28px;
-            transition: all 0.3s ease;
+            transition: transform var(--t-base) var(--ease-out),
+                        border-color var(--t-base) var(--ease-out),
+                        box-shadow var(--t-base) var(--ease-out);
         }
 
         .timeline-card:hover {
@@ -1812,6 +2450,10 @@
             .skills-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -1823,59 +2465,359 @@
                 display: flex;
             }
 
+            .section {
+                padding: 64px 0;
+            }
+
+            .section-header {
+                margin-bottom: 40px;
+            }
+
+            .section-title {
+                font-size: clamp(1.625rem, 6vw, 2rem);
+            }
+
+            .section-desc {
+                font-size: 0.9375rem;
+            }
+
             header {
-                padding: 100px 0 60px;
-                min-height: auto;
+                padding: 80px 0 56px;
+                min-height: 100svh;
+            }
+
+            .profile-wrapper {
+                margin-bottom: 24px;
             }
 
             .profile-img {
-                width: 140px;
-                height: 140px;
+                width: 120px;
+                height: 120px;
+                border-width: 2px;
+                box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2), 0 16px 40px rgba(0, 0, 0, 0.5);
+            }
+
+            .profile-ring {
+                inset: -10px;
+            }
+
+            .profile-glow {
+                inset: -16px;
             }
 
             header h1 {
-                font-size: 2rem;
+                font-size: clamp(2rem, 8vw, 2.75rem);
+                margin-bottom: 12px;
             }
 
             .header-role {
-                font-size: 1rem;
+                font-size: 0.9375rem;
+            }
+
+            .header-desc {
+                font-size: 0.9375rem;
+                max-width: 100%;
+            }
+
+            .header-text {
+                margin-bottom: 12px;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+            }
+
+            .cta-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 16px 20px;
+                font-size: 0.9375rem;
+                min-height: 52px;
+                border-radius: var(--radius-md);
+            }
+
+            .header-social {
+                gap: 10px;
+            }
+
+            .social-icon {
+                width: 44px;
+                height: 44px;
+            }
+
+            .header-stat-bar {
+                gap: 8px;
+                padding: 16px;
+                border-radius: var(--radius-lg);
+            }
+
+            .header-stat {
+                padding: 8px;
+            }
+
+            .header-stat-value {
+                font-size: 1.5rem;
+            }
+
+            .header-stat-label {
+                font-size: 0.6875rem;
+            }
+
+            .scroll-indicator {
+                bottom: 24px;
             }
 
             .about-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 32px;
+            }
+
+            .about-text {
+                font-size: 0.9375rem;
             }
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .stat-card {
+                padding: 20px 16px;
+                border-radius: var(--radius-md);
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .stat-label {
+                font-size: 0.75rem;
             }
 
             .skills-grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .skill-card {
+                padding: 24px 20px;
+                border-radius: var(--radius-lg);
+            }
+
+            .skill-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.125rem;
+            }
+
+            .skill-title {
+                font-size: 1rem;
             }
 
             .projects-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .project-card {
+                border-radius: var(--radius-lg);
+            }
+
+            .project-card::before {
+                height: 48px;
+            }
+
+            .project-body {
+                padding: 12px 14px 14px;
+                gap: 12px;
+            }
+
+            .project-title {
+                font-size: 0.875rem;
+                line-height: 1.3;
             }
 
             .project-actions {
+                padding-top: 0;
+            }
+
+            .project-link {
+                padding: 8px 14px;
+                font-size: 0.75rem;
+                gap: 6px;
+            }
+
+            .services-grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .service-card {
+                padding: 28px 24px;
+                border-radius: var(--radius-xl);
+            }
+
+            .service-icon {
+                width: 52px;
+                height: 52px;
+                font-size: 1.25rem;
+                border-radius: 14px;
+            }
+
+            .service-title {
+                font-size: 1.25rem;
+            }
+
+            .service-desc {
+                font-size: 0.875rem;
+            }
+
+            .service-features li {
+                font-size: 0.875rem;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .why-card {
+                padding: 28px 24px;
+                border-radius: var(--radius-xl);
+            }
+
+            .why-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 1.25rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-dot {
+                left: 12px;
+            }
+
+            .timeline-item {
+                padding-left: 56px;
+            }
+
+            .timeline-header {
+                flex-direction: row;
+                gap: 14px;
+            }
+
+            .timeline-logo {
+                width: 44px;
+                height: 44px;
+                font-size: 1rem;
+            }
+
+            .timeline-role {
+                font-size: 1rem;
+            }
+
+            .timeline-company {
+                font-size: 0.8125rem;
+            }
+
+            .timeline-card {
+                padding: 20px;
+                border-radius: var(--radius-md);
+            }
+
+            .timeline-date {
+                font-size: 0.75rem;
+            }
+
+            .timeline-desc {
+                font-size: 0.875rem;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .contact-info {
+                gap: 12px;
+            }
+
+            .contact-card {
+                padding: 18px;
+                border-radius: var(--radius-md);
+                min-height: 64px;
+            }
+
+            .contact-card-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.125rem;
+            }
+
+            .contact-card-value {
+                font-size: 0.875rem;
+            }
+
+            .contact-cta {
+                padding: 32px 24px;
+                border-radius: var(--radius-xl);
+            }
+
+            .contact-cta-title {
+                font-size: 1.375rem;
+            }
+
+            .contact-cta-desc {
+                font-size: 0.9375rem;
+            }
+
+            .contact-cta-btn {
+                padding: 14px 24px;
+                width: 100%;
+            }
+
+            .contact-socials a {
+                width: 44px;
+                height: 44px;
+            }
+
+            .review-card {
+                border-radius: var(--radius-md);
+            }
+
+            .filter-bar {
+                gap: 8px;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 8px;
+                margin: 0 -20px 32px;
+                padding-left: 20px;
+                padding-right: 20px;
+                scrollbar-width: none;
+            }
+
+            .filter-bar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .filter-btn {
+                flex-shrink: 0;
+                padding: 10px 16px;
+                font-size: 0.8125rem;
             }
 
             .footer-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 32px;
             }
 
             .footer-brand {
                 max-width: none;
-            }
-
-            .scroll-top {
-                bottom: 20px;
-                right: 20px;
-                width: 44px;
-                height: 44px;
             }
 
             .reviews-grid {
@@ -1914,6 +2856,31 @@
                 padding: 8px 14px;
                 font-size: 0.8125rem;
             }
+
+            .service-card {
+                padding: 28px;
+            }
+
+            .contact-cta {
+                padding: 28px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .bottom-nav {
+                left: 8px;
+                right: 8px;
+                padding: 6px;
+            }
+
+            .bottom-nav-item {
+                font-size: 0.625rem;
+                padding: 6px 2px;
+            }
+
+            .bottom-nav-item i {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -1928,12 +2895,14 @@
                 <span>Abdelrhman</span>
             </a>
             <ul class="nav-links">
-                <li><a href="#about" class="active"><i class="fas fa-user"></i> About</a></li>
-                <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
-                <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+                <li><a href="#services"><i class="fas fa-concierge-bell"></i> Services</a></li>
                 <li><a href="#projects"><i class="fas fa-folder"></i> Projects</a></li>
+                <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="#why"><i class="fas fa-thumbs-up"></i> Why Me</a></li>
+                <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
                 <li><a href="#reviews"><i class="fas fa-star"></i> Reviews</a></li>
-                <li><a href="#footer"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="#about"><i class="fas fa-laptop-code"></i> About</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
             <button class="menu-toggle" aria-label="Toggle menu">
                 <i class="fas fa-bars"></i>
@@ -1950,7 +2919,7 @@
             </button>
         </div>
         <ul class="sidebar-links">
-            <li><a href="#about" class="active"><i class="fas fa-user"></i> About</a></li>
+            <li><a href="#about" class="active"><i class="fas fa-laptop-code"></i> About</a></li>
             <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
             <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
             <li><a href="#projects"><i class="fas fa-folder"></i> Projects</a></li>
@@ -1959,8 +2928,9 @@
         </ul>
     </div>
 
-    <header>
+    <header id="home">
         <div class="header-bg">
+            <div class="hero-bg-image"></div>
             <div class="mesh-gradient"></div>
             <div class="header-orb header-orb-1"></div>
             <div class="header-orb header-orb-2"></div>
@@ -1994,32 +2964,32 @@
         </div>
         <div class="container header-content">
             <div class="header-top">
-                <div class="badge-wrapper">
+                <div class="badge-wrapper hero-animate d1">
                     <div class="badge">
                         <span class="badge-dot"></span>
                         Available for Projects
                     </div>
                 </div>
-                <div class="profile-wrapper">
+                <div class="profile-wrapper hero-animate d2">
                     <div class="profile-glow"></div>
                     <div class="profile-ring"></div>
-                    <img src="avater.png" alt="Abdelrhman Hassan" class="profile-img" width="200" height="200" loading="eager">
+                    <img src="avater.png" alt="Abdelrhman Hassan" class="profile-img avatar-float" width="200" height="200" loading="eager">
                 </div>
             </div>
-            <div class="header-text">
+            <div class="header-text hero-animate d3">
                 <h1>Abdelrhman <span class="accent">Hassan</span></h1>
-                <p class="header-role">Full-Stack Developer | Node.js Specialist</p>
+                <p class="header-role">Full-Stack Developer</p>
             </div>
-            <p class="header-desc">Building scalable backend systems and modern web applications with a focus on clean code, performance, and exceptional user experiences.</p>
-            <div class="cta-group">
+            <p class="header-desc hero-animate d4">Building scalable backend systems and modern web applications with a focus on clean code, performance, and exceptional user experiences.</p>
+            <div class="cta-group hero-animate d4">
                 <a href="#projects" class="cta-btn cta-primary">
                     View Projects <i class="fas fa-arrow-right"></i>
                 </a>
-                <a href="#footer" class="cta-btn cta-secondary">
+                <a href="#contact" class="cta-btn cta-secondary">
                     Get in Touch <i class="fas fa-paper-plane"></i>
                 </a>
             </div>
-            <div class="header-social">
+            <div class="header-social hero-animate d5">
                 <a href="https://github.com/puplicHost" class="social-icon" target="_blank" rel="noopener" aria-label="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
@@ -2033,7 +3003,7 @@
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
-            <div class="header-stat-bar">
+            <div class="header-stat-bar hero-animate d5">
                 <div class="header-stat">
                     <div class="header-stat-value">3<span class="accent">+</span></div>
                     <div class="header-stat-label">Years Experience</div>
@@ -2048,46 +3018,544 @@
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
+        <div class="scroll-indicator hero-animate d5">
             <div class="mouse"></div>
             <span>Scroll</span>
         </div>
     </header>
 
-    <section id="about" class="section">
+
+
+    <section id="services" class="section">
         <div class="container">
             <div class="section-header animate-in">
-                <div class="section-label">About Me</div>
-                <h2 class="section-title">Crafting Digital Experiences</h2>
-                <p class="section-desc">I build scalable backend systems and modern web applications with a focus on performance and user experience.</p>
+                <div class="section-label">Services</div>
+                <h2 class="section-title">What I Can Build for You</h2>
+                <p class="section-desc">From personal portfolios to full-scale online stores, I deliver modern web solutions tailored to your goals.</p>
             </div>
-            <div class="about-grid">
-                <div class="about-text animate-in delay-1">
-                    <p>Full-Stack Developer with strong backend focus, specializing in building scalable applications and designing RESTful APIs using Node.js and Express.js.</p>
-                    <p>Experienced in working with databases, implementing authentication systems, and building robust, well-structured API architectures. Comfortable working across the entire application stack with emphasis on clean code, performance optimization, and security best practices.</p>
-                </div>
-                <div class="stats-grid animate-in delay-2">
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-calendar"></i></div>
-                        <div class="stat-value">3+</div>
-                        <div class="stat-label">Years Experience</div>
+            <div class="services-grid stagger">
+                <article class="service-card">
+                    <div class="service-icon"><i class="fas fa-palette"></i></div>
+                    <h3 class="service-title">Portfolio Websites</h3>
+                    <p class="service-desc">Professional portfolio websites designed to showcase your skills, experience, and projects with a modern and responsive user experience.</p>
+                    <div class="service-features-label">Features</div>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Modern UI Design</li>
+                        <li><i class="fas fa-check"></i> Responsive Layout</li>
+                        <li><i class="fas fa-check"></i> Fast Performance</li>
+                        <li><i class="fas fa-check"></i> SEO-Friendly Structure</li>
+                        <li><i class="fas fa-check"></i> Smooth Animations</li>
+                    </ul>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fas fa-building"></i></div>
+                    <h3 class="service-title">Company Websites</h3>
+                    <p class="service-desc">Professional business websites that help companies establish a strong online presence and present their services effectively.</p>
+                    <div class="service-features-label">Features</div>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Corporate Websites</li>
+                        <li><i class="fas fa-check"></i> Service Pages</li>
+                        <li><i class="fas fa-check"></i> Contact Forms</li>
+                        <li><i class="fas fa-check"></i> Responsive Design</li>
+                        <li><i class="fas fa-check"></i> Performance Optimization</li>
+                    </ul>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3 class="service-title">E-Commerce Stores</h3>
+                    <p class="service-desc">Modern online stores designed to deliver seamless shopping experiences and maximize conversions.</p>
+                    <div class="service-features-label">Features</div>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Product Catalogs</li>
+                        <li><i class="fas fa-check"></i> Landing Pages</li>
+                        <li><i class="fas fa-check"></i> Mobile-Friendly Design</li>
+                        <li><i class="fas fa-check"></i> Fast Loading Speed</li>
+                        <li><i class="fas fa-check"></i> Store Customization &amp; Support</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header animate-in">
+                <div class="section-label">Portfolio</div>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-desc">A selection of my recent work showcasing modern design and technical excellence.</p>
+            </div>
+            <div class="filter-bar animate-in">
+                <button class="filter-btn active" data-filter="portfolios">Portfolios</button>
+                <button class="filter-btn" data-filter="business">Business</button>
+                <button class="filter-btn" data-filter="ecommerce">E-Commerce</button>
+            </div>
+            <div class="projects-grid stagger">
+                <article class="project-card" data-category="business">
+                    <div class="project-category">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Business</span>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
-                        <div class="stat-value">20+</div>
-                        <div class="stat-label">Projects Done</div>
+                    <div class="project-body">
+                        <h3 class="project-title">Gaith Agency</h3>
+                        <div class="project-actions">
+                            <a href="https://gaithagency.github.io/GaithAgency/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-users"></i></div>
-                        <div class="stat-value">15+</div>
-                        <div class="stat-label">Happy Clients</div>
+                </article>
+
+                <article class="project-card" data-category="business">
+                    <div class="project-category">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Business</span>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon"><i class="fas fa-coffee"></i></div>
-                        <div class="stat-value">∞</div>
-                        <div class="stat-label">Cups of Coffee</div>
+                    <div class="project-body">
+                        <h3 class="project-title">Brandolla</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/-Brandolla-/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
                     </div>
-                </div>
+                </article>
+
+                <article class="project-card" data-category="business">
+                    <div class="project-category">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Business</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Pins & Corners</h3>
+                        <div class="project-actions">
+                            <a href="https://pinsandcorners.com/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="business">
+                    <div class="project-category">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Business</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Elrowad</h3>
+                        <div class="project-actions">
+                            <a href="https://www.elrowad.online/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                 <article class="project-card" data-category="ecommerce">
+                    <div class="project-category">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>E-Commerce</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Zynh Care</h3>
+                        <div class="project-actions">
+                            <a href="https://zynh-care.shop/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="ecommerce">
+                    <div class="project-category">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>E-Commerce</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Vigo Brand</h3>
+                        <div class="project-actions">
+                            <a href="https://www.vigo-brand.com/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="ecommerce">
+                    <div class="project-category">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>E-Commerce</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Mengo Store</h3>
+                        <div class="project-actions">
+                            <a href="https://www.mengo.store/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Omnia Abess</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/omnia-Abess/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Heba Taha</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Heba-Taha/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Basel Sharaf</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Basel-Sharaf/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Ebtehal Mohamed</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Ebtehal-mohamed/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Duha Abubaker</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Duha-Abubaker/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Mawada Ahmed Adam</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Mawada-Ahmed-Adam/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Youmna Elsaeed</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Youmna-Elsaeed/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Norhan Mohamed</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Norhan-Mohamed-/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Lubna Rashid</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Lubna_Rashid/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Salma Alaa Eldeen</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Salma-Alaa-Eldeen/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Osama Shehab</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Osama-Shehab/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Abdeen Mohamed</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Abdeen-Mohamed/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Ahmed Hussein</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/AHMED-HUSSEIN/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Menna Mahmoud</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/MennaMahmoud/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Esraa Adel</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/ESRAA-ADEL-/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Manar Mohmed</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Manar-Mohmed/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Hadeer Saad</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Hadeer-Saad/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Nermin Saeed</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Nermin-Saeed-/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Marwa Abdelaziz</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Marwa-Abdelaziz/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Ghada Elashmawy</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Ghada-Elashmawy/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Mai Ibrahim Gabr</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Mai-Ibrahim-Gabr/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Amira Ashraf</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Amira-Ashraf/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Kholud Mohammad</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Kholud-Mohammad/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card" data-category="portfolios">
+                    <div class="project-category">
+                        <i class="fas fa-laptop-code"></i>
+                        <span>Portfolios</span>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Aliya Abdelaziz</h3>
+                        <div class="project-actions">
+                            <a href="https://puplichost.github.io/Aliya-Abdelaziz/" class="project-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -2099,8 +3567,8 @@
                 <h2 class="section-title">Work Experience</h2>
                 <p class="section-desc">A journey through my professional career and the valuable experiences gained along the way.</p>
             </div>
-            <div class="timeline">
-                <div class="timeline-item animate-in">
+            <div class="timeline stagger">
+                <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">
                         <i class="fas fa-calendar"></i> Mar 2026 - Present · 3 mos
@@ -2126,7 +3594,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item animate-in delay-1">
+                <div class="timeline-item delay-1">
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">
                         <i class="fas fa-calendar"></i> Jan 2026 - Feb 2026 · 2 mos
@@ -2151,7 +3619,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-item animate-in delay-2">
+                <div class="timeline-item delay-2">
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">
                         <i class="fas fa-calendar"></i> Mar 2023 - Feb 2026 · 3 yrs
@@ -2180,6 +3648,38 @@
         </div>
     </section>
 
+    <section id="why" class="section">
+        <div class="container">
+            <div class="section-header animate-in">
+                <div class="section-label">Why Me</div>
+                <h2 class="section-title">Why Work With Me</h2>
+                <p class="section-desc">A few reasons clients choose to collaborate with me on their next project.</p>
+            </div>
+            <div class="why-grid stagger">
+                <article class="why-card">
+                    <div class="why-icon"><i class="fas fa-gem"></i></div>
+                    <h3 class="why-title">Quality Work</h3>
+                    <p class="why-desc">Clean, well-structured code and pixel-perfect designs that follow modern best practices and standards.</p>
+                </article>
+                <article class="why-card delay-1">
+                    <div class="why-icon"><i class="fas fa-bolt"></i></div>
+                    <h3 class="why-title">Fast Delivery</h3>
+                    <p class="why-desc">Efficient workflow and clear communication ensure your project is delivered on time, every time.</p>
+                </article>
+                <article class="why-card delay-2">
+                    <div class="why-icon"><i class="fas fa-code"></i></div>
+                    <h3 class="why-title">Clean Code</h3>
+                    <p class="why-desc">Maintainable, scalable, and well-documented code that's easy to extend and integrate with other systems.</p>
+                </article>
+                <article class="why-card delay-3">
+                    <div class="why-icon"><i class="fas fa-headset"></i></div>
+                    <h3 class="why-title">24/7 Support</h3>
+                    <p class="why-desc">Ongoing support and quick responses to make sure your product keeps running smoothly after launch.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
     <section id="skills" class="section">
         <div class="container">
             <div class="section-header animate-in">
@@ -2187,8 +3687,8 @@
                 <h2 class="section-title">Technical Expertise</h2>
                 <p class="section-desc">A comprehensive toolkit for building modern web applications from frontend to backend.</p>
             </div>
-            <div class="skills-grid">
-                <div class="skill-card animate-in delay-1">
+            <div class="skills-grid stagger">
+                <div class="skill-card delay-1">
                     <div class="skill-header">
                         <div class="skill-icon"><i class="fas fa-palette"></i></div>
                         <h3 class="skill-title">Frontend Development</h3>
@@ -2216,7 +3716,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="skill-card animate-in delay-2">
+                <div class="skill-card delay-2">
                     <div class="skill-header">
                         <div class="skill-icon"><i class="fas fa-server"></i></div>
                         <h3 class="skill-title">Backend Development</h3>
@@ -2240,7 +3740,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="skill-card animate-in delay-3">
+                <div class="skill-card delay-3">
                     <div class="skill-header">
                         <div class="skill-icon"><i class="fas fa-tools"></i></div>
                         <h3 class="skill-title">Development Tools</h3>
@@ -2264,621 +3764,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="section">
-        <div class="container">
-            <div class="section-header animate-in">
-                <div class="section-label">Portfolio</div>
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-desc">A selection of my recent work showcasing modern design and technical excellence.</p>
-            </div>
-            <div class="filter-bar animate-in">
-                <button class="filter-btn active" data-filter="all">All Projects</button>
-                <button class="filter-btn" data-filter="portfolios">Portfolios</button>
-                <button class="filter-btn" data-filter="landing-pages">Landing Pages</button>
-                <button class="filter-btn" data-filter="backend-projects">Backend</button>
-            </div>
-            <div class="projects-grid">
-                <article class="project-card animate-in" data-category="landing-pages">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-rocket"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Gaith Agency</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Landing page for Gaith Agency with a modern professional design to attract clients and showcase services.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://gaithagency.github.io/GaithAgency/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="landing-pages">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-shopping-bag"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Brandolla</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Modern e-commerce landing page optimized for high conversion and user engagement.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/-Brandolla-/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="backend-projects">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-database"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Backend CRUD System</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Robust backend system with full CRUD operations, built with Node.js and Express.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Node.js</span>
-                            <span class="project-tag">Express</span>
-                            <span class="project-tag">MongoDB</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/puplicHost/Backend-CRUD-System" class="project-link" target="_blank" rel="noopener">
-                                <i class="fab fa-github"></i> View Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-user"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Omnia Abess</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Personal portfolio website showcasing skills and experiences with smooth animations.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/omnia-Abess/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-briefcase"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Heba Taha</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Professional portfolio with modern design and excellent user experience.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Heba-Taha/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-laptop"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Basel Sharaf</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Modern personal website with distinct browsing experience and professional layout.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Basel-Sharaf/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-palette"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Ebtehal Mohamed</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Modern design portfolio with smooth UX and organized project showcase.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Ebtehal-mohamed/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-share-alt"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Duha Abubaker</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Personal website for social media marketing specialist with professional showcase.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Duha-Abubaker/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-user-circle"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Mawada Ahmed Adam</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Personal website showcasing projects and skills professionally with an attractive user interface.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Mawada-Ahmed-Adam/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-briefcase"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Youmna Elsaeed</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Professional portfolio with motion effects and smooth user experience.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Youmna-Elsaeed/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-laptop"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Norhan Mohamed</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Integrated personal website with modern UI and excellent browsing experience.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Norhan-Mohamed-/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-palette"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Lubna Rashid</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Modern portfolio with smooth user experience, focusing on displaying projects attractively.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Lubna_Rashid/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-user-circle"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Salma Alaa Eldeen</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Modern personal website displaying experiences and skills in a smooth and attractive way.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Salma-Alaa-Eldeen/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-pen-nib"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Osama Shehab</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Personal website for a content writer specializing in SEO strategy and creative writing.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Osama-Shehab/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-file-alt"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Abdeen Mohamed</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Personal website for a content writer, social media specialist, and scriptwriter.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Abdeen-Mohamed/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-edit"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Ahmed Hussein</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Personal website for a content writer specialized in copywriting and landing page creation.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/AHMED-HUSSEIN/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-user-circle"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Menna Mahmoud</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Professional portfolio showcasing skills, experiences, and projects with modern interface.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/MennaMahmoud/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-briefcase"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Esraa Adel</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Distinguished portfolio website showcasing skills and works with modern design and integrated UX.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/ESRAA-ADEL-/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-laptop-code"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Manar Mohmed</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Personal website showcasing technical experiences and programming projects with responsive design.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Manar-Mohmed/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-palette"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Hadeer Saad</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Artistic and technical portfolio reflecting creativity with smooth browsing and innovative design.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Hadeer-Saad/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-user-tag"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Nermin Saeed</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Comprehensive introductory website highlighting career path and achievements with modern responsive design.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Nermin-Saeed-/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-user-circle"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Marwa Abdelaziz</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Professional personal website showcasing skills and experiences with modern interface.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Marwa-Abdelaziz/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-briefcase"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Ghada Elashmawy</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Distinguished portfolio showcasing skills and works professionally with modern design and integrated UX.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Ghada-Elashmawy/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="project-card animate-in" data-category="portfolios">
-                    <div class="project-body">
-                        <div class="project-top">
-                            <div class="project-icon"><i class="fas fa-laptop-code"></i></div>
-                            <div class="project-meta">
-                                <h3 class="project-title">Mai Ibrahim Gabr</h3>
-                            </div>
-                        </div>
-                        <p class="project-desc">Personal website showcasing technical experiences and programming projects with attractive UI.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://puplichost.github.io/Mai-Ibrahim-Gabr/" class="project-link" target="_blank" rel="noopener">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
             </div>
         </div>
     </section>
@@ -2967,6 +3852,101 @@
         <img src="" alt="Client Review" class="lightbox-content" id="lightboxImg">
     </div>
 
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header animate-in">
+                <div class="section-label">About Me</div>
+                <h2 class="section-title">Crafting Digital Experiences</h2>
+                <p class="section-desc">I build scalable backend systems and modern web applications with a focus on performance and user experience.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-text animate-in delay-1">
+                    <p>Full-Stack Developer with strong backend focus, specializing in building scalable applications and designing RESTful APIs using Node.js and Express.js.</p>
+                    <p>Experienced in working with databases, implementing authentication systems, and building robust, well-structured API architectures. Comfortable working across the entire application stack with emphasis on clean code, performance optimization, and security best practices.</p>
+                </div>
+                <div class="stats-grid stagger delay-1">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-calendar"></i></div>
+                        <div class="stat-value">3+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-value">20+</div>
+                        <div class="stat-label">Projects Done</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-value">15+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-coffee"></i></div>
+                        <div class="stat-value">∞</div>
+                        <div class="stat-label">Cups of Coffee</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header animate-in">
+                <div class="section-label">Contact</div>
+                <h2 class="section-title">Let's Build Something Together</h2>
+                <p class="section-desc">Have a project in mind or want to discuss an idea? Reach out and I'll get back to you as soon as possible.</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info stagger">
+                    <a class="contact-card" href="mailto:dodahassan0045@gmail.com">
+                        <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <div class="contact-card-label">Email</div>
+                            <div class="contact-card-value">dodahassan0045@gmail.com</div>
+                        </div>
+                    </a>
+                    <a class="contact-card" href="https://wa.me/201223789179" target="_blank" rel="noopener">
+                        <div class="contact-card-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div>
+                            <div class="contact-card-label">WhatsApp</div>
+                            <div class="contact-card-value">+20 122 378 9179</div>
+                        </div>
+                    </a>
+                    <a class="contact-card" href="https://github.com/puplicHost" target="_blank" rel="noopener">
+                        <div class="contact-card-icon"><i class="fab fa-github"></i></div>
+                        <div>
+                            <div class="contact-card-label">GitHub</div>
+                            <div class="contact-card-value">github.com/puplicHost</div>
+                        </div>
+                    </a>
+                    <a class="contact-card" href="https://www.linkedin.com/in/abdelrahman-hasan-67187a38b/" target="_blank" rel="noopener">
+                        <div class="contact-card-icon"><i class="fab fa-linkedin"></i></div>
+                        <div>
+                            <div class="contact-card-label">LinkedIn</div>
+                            <div class="contact-card-value">Abdelrhman Hassan</div>
+                        </div>
+                    </a>
+                    <div class="contact-socials">
+                        <a href="https://github.com/puplicHost" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/abdelrahman-hasan-67187a38b/" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://wa.me/201223789179" aria-label="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+                        <a href="mailto:dodahassan0045@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.youtube.com/@LinuxUserrr-v1j" aria-label="YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-cta animate-in delay-1">
+                    <h3 class="contact-cta-title">Ready to start your project?</h3>
+                    <p class="contact-cta-desc">Whether you need a portfolio, a company website, or a full e-commerce store, I'm here to help you turn your idea into reality.</p>
+                    <a class="contact-cta-btn" href="mailto:dodahassan0045@gmail.com">
+                        <i class="fas fa-paper-plane"></i> Send a Message
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer id="footer">
         <div class="container">
             <div class="footer-grid">
@@ -2980,10 +3960,14 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
-                        <li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
                         <li><a href="#projects"><i class="fas fa-chevron-right"></i> Projects</a></li>
+                        <li><a href="#experience"><i class="fas fa-chevron-right"></i> Experience</a></li>
+                        <li><a href="#why"><i class="fas fa-chevron-right"></i> Why Me</a></li>
+                        <li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li>
                         <li><a href="#reviews"><i class="fas fa-chevron-right"></i> Reviews</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -3002,6 +3986,29 @@
             </div>
         </div>
     </footer>
+
+    <nav class="bottom-nav" id="bottomNav" aria-label="Primary">
+        <a href="#home" class="bottom-nav-item active" data-target="header">
+            <i class="fas fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="#services" class="bottom-nav-item" data-target="services">
+            <i class="fas fa-th-large"></i>
+            <span>Services</span>
+        </a>
+        <a href="#projects" class="bottom-nav-item" data-target="projects">
+            <i class="fas fa-folder"></i>
+            <span>Work</span>
+        </a>
+        <a href="#reviews" class="bottom-nav-item" data-target="reviews">
+            <i class="fas fa-star"></i>
+            <span>Reviews</span>
+        </a>
+        <a href="#contact" class="bottom-nav-item" data-target="contact">
+            <i class="fas fa-envelope"></i>
+            <span>Contact</span>
+        </a>
+    </nav>
 
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
         <i class="fas fa-arrow-up"></i>
@@ -3051,19 +4058,62 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            const observer = new IntersectionObserver((entries) => {
+            function assignStaggerIndex(selector, parentSelector, maxIndex) {
+                const parents = parentSelector
+                    ? document.querySelectorAll(parentSelector)
+                    : [document];
+                parents.forEach(parent => {
+                    parent.querySelectorAll(selector).forEach((el, i) => {
+                        el.style.setProperty('--i', maxIndex !== undefined ? Math.min(i, maxIndex) : i);
+                    });
+                });
+            }
+
+            assignStaggerIndex('.service-card', '.services-grid');
+            assignStaggerIndex('.project-card', '.projects-grid', 8);
+            assignStaggerIndex('.why-card', '.why-grid');
+            assignStaggerIndex('.skill-card', '.skills-grid');
+            assignStaggerIndex('.stat-card', '.stats-grid');
+            assignStaggerIndex('.contact-card', '.contact-info');
+            assignStaggerIndex('.timeline-item', '.timeline');
+
+            const revealObserver = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        const fills = entry.target.querySelectorAll('.skill-fill');
-                        fills.forEach(fill => {
-                            fill.style.width = fill.dataset.width + '%';
-                        });
+                    if (!entry.isIntersecting) return;
+                    const el = entry.target;
+                    el.classList.add('visible');
+                    if (el.classList.contains('stagger')) {
+                        el.classList.add('visible');
+                    }
+                    obs.unobserve(el);
+                });
+            }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
+
+            document.querySelectorAll('.animate-in, .stagger').forEach(el => {
+                revealObserver.observe(el);
+            });
+
+            setTimeout(() => {
+                document.querySelectorAll('.animate-in, .stagger').forEach(el => {
+                    if (!el.classList.contains('visible')) {
+                        el.classList.add('visible');
                     }
                 });
-            }, { threshold: 0.1 });
+            }, 2000);
 
-            document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+            const skillObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const card = entry.target;
+                    card.classList.add('visible');
+                    card.querySelectorAll('.skill-fill').forEach(fill => {
+                        fill.style.width = (fill.dataset.width || 0) + '%';
+                    });
+                    obs.unobserve(card);
+                });
+            }, { threshold: 0.25, rootMargin: '0px 0px -30px 0px' });
+
+            document.querySelectorAll('.skill-card').forEach(el => skillObserver.observe(el));
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -3120,13 +4170,23 @@
                 if (e.target === lightbox) closeLightbox();
             });
 
+            const activeFilter = document.querySelector('.filter-btn.active');
+            if (activeFilter) {
+                projectCards.forEach(card => {
+                    if (card.dataset.category !== activeFilter.dataset.filter) {
+                        card.classList.add('hide');
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     filterBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     const filter = btn.dataset.filter;
                     projectCards.forEach(card => {
-                        if (filter === 'all' || card.dataset.category === filter) {
+                        if (card.dataset.category === filter) {
                             card.classList.remove('hide');
                             card.style.display = '';
                         } else {
@@ -3210,48 +4270,24 @@
 
             initSlider();
 
-            const typedTextEl = document.getElementById('typedText');
-            const roles = ['Full-Stack Developer', 'Node.js Specialist', 'Backend Engineer', 'API Architect'];
-            let roleIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            let typeSpeed = 100;
 
-            function typeEffect() {
-                const currentRole = roles[roleIndex];
-                if (isDeleting) {
-                    typedTextEl.textContent = currentRole.substring(0, charIndex - 1);
-                    charIndex--;
-                    typeSpeed = 50;
-                } else {
-                    typedTextEl.textContent = currentRole.substring(0, charIndex + 1);
-                    charIndex++;
-                    typeSpeed = 100;
-                }
 
-                if (!isDeleting && charIndex === currentRole.length) {
-                    typeSpeed = 2000;
-                    isDeleting = true;
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    roleIndex = (roleIndex + 1) % roles.length;
-                    typeSpeed = 500;
-                }
+            const sections = document.querySelectorAll('section[id], header[id]');
+            const bottomNav = document.getElementById('bottomNav');
+            const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+            let lastScrollY = window.scrollY;
+            let navHidden = false;
 
-                setTimeout(typeEffect, typeSpeed);
-            }
-
-            setTimeout(typeEffect, 1000);
-
-            const sections = document.querySelectorAll('section[id]');
-            window.addEventListener('scroll', () => {
-                let current = '';
+            function updateActiveSection() {
+                let current = sections[0] ? sections[0].id : '';
+                const scrollY = window.scrollY;
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 100;
-                    if (window.scrollY >= sectionTop) {
-                        current = section.getAttribute('id');
+                    const sectionTop = section.offsetTop - 120;
+                    if (scrollY >= sectionTop) {
+                        current = section.id || section.getAttribute('id');
                     }
                 });
+
                 document.querySelectorAll('.nav-links a').forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === `#${current}`) {
@@ -3262,6 +4298,55 @@
                     link.classList.remove('active');
                     if (link.getAttribute('href') === `#${current}`) {
                         link.classList.add('active');
+                    }
+                });
+                bottomNavItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${current}`) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+
+            function handleNavVisibility() {
+                const currentY = window.scrollY;
+                const diff = currentY - lastScrollY;
+                if (currentY < 80) {
+                    bottomNav.classList.remove('hidden');
+                    navHidden = false;
+                } else if (diff > 6 && !navHidden) {
+                    bottomNav.classList.add('hidden');
+                    navHidden = true;
+                } else if (diff < -6 && navHidden) {
+                    bottomNav.classList.remove('hidden');
+                    navHidden = false;
+                }
+                lastScrollY = currentY;
+            }
+
+            let scrollTicking = false;
+            window.addEventListener('scroll', () => {
+                if (!scrollTicking) {
+                    requestAnimationFrame(() => {
+                        updateActiveSection();
+                        handleNavVisibility();
+                        scrollTicking = false;
+                    });
+                    scrollTicking = true;
+                }
+            });
+
+            updateActiveSection();
+
+            bottomNavItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const href = item.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
                     }
                 });
             });
